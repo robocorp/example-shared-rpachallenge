@@ -20,7 +20,7 @@ if not exist "%SHARED_DIRECTORY%\" (
     goto :PRINT_VERSION
 ) else (
     echo EXISTS - Updating to Emerson Common package version %version% ...
-    git subtree pull --prefix shared https://github.com/robocorp/example-shared-code-common %version% || goto :ERROR_BRANCH
+    git subtree pull --prefix shared https://github.com/robocorp/example-shared-code-common %version% --squash || goto :ERROR_BRANCH
 )
 goto :PRINT_VERSION
 
