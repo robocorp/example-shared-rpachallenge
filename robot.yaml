@@ -1,0 +1,18 @@
+tasks:
+  Simple Task:
+    shell: python -m robot -d output tasks.robot
+
+artifactsDir: output
+condaConfigFile: shared/conda.yaml
+ignoreFiles: [.gitignore]
+
+PATH:
+ - .
+ - resources
+PYTHONPATH:
+ - .
+ - Libraries
+ - resources
+ - shared
+ - shared/libraries
+ - shared/resources
