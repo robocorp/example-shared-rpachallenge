@@ -1,5 +1,5 @@
 *** Settings ***
-Resource          shared/resources/common.resource
+Resource          ${CURDIR}${/}shared${/}resources${/}common.resource
 
 *** Tasks ***
 Start the challenge
