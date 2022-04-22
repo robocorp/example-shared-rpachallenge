@@ -1,5 +1,5 @@
 *** Settings ***
-Resource          ${CURDIR}${/}shared${/}resources${/}common.resource
+Resource          rpachallenge.resource
 
 *** Tasks ***
 Start the challenge

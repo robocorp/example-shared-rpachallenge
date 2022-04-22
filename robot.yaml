@@ -1,6 +1,6 @@
 tasks:
-  Simple Task:
-    shell: python -m robot -d output tasks.robot
+  rpachallenge:
+    shell: python -m robot -d output -t "complete the challenge" tasks.robot
 
 artifactsDir: output
 condaConfigFile: shared/conda.yaml
@@ -11,7 +11,7 @@ PATH:
  - resources
 PYTHONPATH:
  - .
- - Libraries
+ - libraries
  - resources
  - shared
  - shared/libraries
