@@ -1,4 +1,4 @@
-import shared.libraries.CustomLogging
+import shared.libraries.UserLibrary
 
 if __name__ == "__main__":
-      cl = CustomLogging()
+      cl = UserLibrary()
