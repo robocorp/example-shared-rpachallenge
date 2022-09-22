@@ -24,7 +24,6 @@ goto :PRINT_VERSION
 
 :PRINT_VERSION
 rem echo version.txt & type shared\version.txt
-echo LOL
 goto :END
 
 :ERROR_BRANCH
