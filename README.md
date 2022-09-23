@@ -3,5 +3,5 @@ Example repo for storing common parts used by multiple robots
 
 ## TODO
 
-- [ ] release.bat / release.sh
+- [x] release.bat
 - [ ] documentation page for provided keywords (docgen)
