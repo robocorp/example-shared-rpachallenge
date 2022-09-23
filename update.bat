@@ -12,6 +12,8 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`git diff-files`) DO (
     IF NOT "%%F" == "" goto :ERROR_CHANGES
 )
 
+
+echo Current version & type %SHARED_DIRECTORY%\version.txt
 set /P version="Select package version ['X.Y.Z' OR empty to quit]: "
 IF "%version%"=="" goto :END
 
@@ -27,7 +29,7 @@ goto :PRINT_VERSION
 
 
 :PRINT_VERSION
-rem echo version.txt & type shared\version.txt
+echo Updated to version & type %SHARED_DIRECTORY%\version.txt
 goto :END
 
 :ERROR_CHANGES
