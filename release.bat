@@ -11,6 +11,11 @@ SET /P release="Set release version ['X.Y.Z' or empty for no release]: "
 IF "%release%"=="" goto :END
 
 SET releasetext=Release %release% for Shared Code Common
+
+echo %release% > version.txt
+git add version.txt
+git commit -m "%releasetext%"
+git push
 git tag -a %release% -m "%releasetext%"
 git push origin refs/tags/%release%
 
