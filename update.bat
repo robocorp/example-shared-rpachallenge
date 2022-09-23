@@ -1,23 +1,27 @@
 @echo off
 pushd .
-
+SETLOCAL ENABLEDELAYEDEXPANSION
 SET SHARED_REPOSITORY=https://github.com/robocorp/example-shared-code-common
-SET SHARED_DIRECTORY_NAME=shared
+SET SHARED_DIRECTORY=shared
 
 SET scriptPath=%~dp0
 SET scriptPath=%scriptPath:~0,-1%
 cd /D %scriptPath%
 
+FOR /F "tokens=* USEBACKQ" %%F IN (`git diff-files`) DO (
+    IF NOT "%%F" == "" goto :ERROR_CHANGES
+)
+
 set /P version="Select package version ['X.Y.Z' OR empty to quit]: "
 IF "%version%"=="" goto :END
 
 if not exist "%SHARED_DIRECTORY%\" (
-    echo Retrieving Shared repository version %version% ...
-    git subtree add --prefix shared %SHARED_REPOSITORY% %version% --squash || goto :ERROR_BRANCH
+    echo Retrieving common libraries version: %version% ...
+    git subtree add --prefix %SHARED_DIRECTORY% %SHARED_REPOSITORY% %version% --squash || goto :ERROR_BRANCH
     goto :PRINT_VERSION
 ) else (
-    echo Updating to Shared repository version %version% ...
-    git subtree pull --prefix shared %SHARED_REPOSITORY% %version% --squash || goto :ERROR_BRANCH
+    echo Updating common libraries to version: %version% ...
+    git subtree pull --prefix %SHARED_DIRECTORY% %SHARED_REPOSITORY% %version% --squash || goto :ERROR_BRANCH
 )
 goto :PRINT_VERSION
 
@@ -26,11 +30,17 @@ goto :PRINT_VERSION
 rem echo version.txt & type shared\version.txt
 goto :END
 
+:ERROR_CHANGES
+echo Error! You have uncommitted changes, please commit or stash before updating common libraries.
+goto :END
+
+
 :ERROR_BRANCH
-echo Error! Git branch '%version%' does not exist or no access to repository
+echo Error! Could not find '%version%' in common libraries repository: %SHARED_REPOSITORY%
 goto :END
 
 :END
 set scriptPath=
 pause
+ENDLOCAL
 popd
